@@ -1,9 +1,6 @@
 package model
 
-import "github.com/golang-jwt/jwt"
-
 type Jwt struct {
-	*jwt.StandardClaims
 	UserGUID     string `json:"user_guid"`
 	AccsessToken string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
