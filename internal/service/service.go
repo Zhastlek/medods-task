@@ -46,7 +46,6 @@ func (s *service) CreateToken(userGUID string) (*model.Jwt, error) {
 }
 
 func (s *service) UpdateToken(tokens *model.Jwt) (*model.Jwt, error) {
-
 	_, valid := s.checkAccessToken(tokens.AccsessToken)
 	if !valid {
 		log.Printf("this access token is not valid:--> %v\n", valid)
@@ -129,7 +128,8 @@ func (s *service) checkAccessToken(accessToken string) (*model.UserToken, bool) 
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
-		return os.Getenv("access_key"), nil
+		// return []byte("medodskey"), nil
+		return []byte(os.Getenv("access_key")), nil
 	})
 	if err != nil {
 		v, _ := err.(*jwt.ValidationError)
@@ -137,6 +137,8 @@ func (s *service) checkAccessToken(accessToken string) (*model.UserToken, bool) 
 			log.Println("time EXPIRED")
 			return nil, true
 		}
+		log.Println(os.Getenv("access_key"))
+		log.Println(88898989, err)
 		return nil, false
 	}
 
