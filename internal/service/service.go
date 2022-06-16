@@ -137,8 +137,6 @@ func (s *service) checkAccessToken(accessToken string) (*model.UserToken, bool) 
 			log.Println("time EXPIRED")
 			return nil, true
 		}
-		log.Println(os.Getenv("access_key"))
-		log.Println(88898989, err)
 		return nil, false
 	}
 
